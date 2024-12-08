@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "messager"
+version = "0.1.0"
+description = "Package to create log messages."
+authors = ["eniocsjunior <eniocsjunior@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+blessed = "^1.20.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
