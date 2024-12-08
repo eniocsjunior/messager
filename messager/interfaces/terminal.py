@@ -1,4 +1,3 @@
-from blessed import Terminal as BlessedTerminal
 from datetime import datetime
 from typing import (
     NoReturn,
@@ -9,7 +8,6 @@ from messager.interfaces import Interface
 
 
 class Terminal(Interface):
-    terminal = BlessedTerminal()
 
     def write(
         self: Self,
@@ -18,17 +16,17 @@ class Terminal(Interface):
     ) -> NoReturn:
         if weight >= self.min or weight <= self.max:
             color = {
-                0: self.terminal.bold_italic_bright_black,
-                1: self.terminal.bold_italic,
-                2: self.terminal.bold_white_on_yellow,
-                3: self.terminal.bold_italic_white_on_red,
-                4: self.terminal.bold_italic_yellow_on_red_blink
+                0: '\033[1;96m ',
+                1: '\033[1;92m ',
+                2: '\033[1;93m ',
+                3: '\033[1;91m ',
+                4: '\033[1;101;97m '
             }
-            formated_message = ' ' +\
+            formated_message = color[weight] +\
                 self.app + ' - ' +\
                 self.module + ' - ' +\
                 datetime.now().strftime(self.mask) + ' - ' +\
-                message + ' '
+                message + ' \033[0m'
             print(
-                color[weight](formated_message)
+                formated_message
             )
