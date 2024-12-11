@@ -2,41 +2,34 @@
 Package to create log messages.
 
 ## How to use
-Initially we must instantiate the interfaces we want to use:
+Initially, we must configure the messaging server with the interfaces we want to use:
 ```python
-from messager import Terminal
-terminal = Terminal()
+
+>>> from messager import Message, File, SQL
+>>> file = File()
+>>> message = Message(app='my_app', interfaces=[file])
 ```
-The interfaces have 2 optional parameters:
-* min: Minimum level to run the interface.
-* max: Maximum level to run the interface.
-
-The levels are:
-* 0: Debug
-* 1: Info
-* 2: Warning
-* 3: Error
-* 4: Critical
-
-After configuring the interfaces, it is necessary to add the interfaces to a Messages instance:
+You can also add interfaces after instantiating the Message class:
 ```python
-from messager import Message
-message = Message(
-    app='Test',
-    interfaces=[terminal]
-)
+>>> message.interfaces
+[<messager.interfaces.files.File object at 0xffffba9d1fd0>]
+>>> postgres = SQL(uri='postgres://user:password@localhost:5432/database')
+>>> sqlite = SQL(uri='sqlite:///mylogfile.db')
+>>> message.add_interface(postgres)
+>>> message.add_interface(sqlite)
+>>> message.interfaces
+[<messager.interfaces.files.File object at 0xffffba9d1fd0>, <messager.interfaces.sql.SQL object at 0xffffbad7a7d0>, <messager.interfaces.sql.SQL object at 0xffffbad78ac9>]
 ```
-
-It is recommended but not mandatory to call the Message class in each module of your code:
+After instantiating the Message class, you can call the instance again in another part of the code:
 ```python
-message(module='my_module')
+>>> message(module='my_module')
 ```
-
-Then, just call the appropriate method for your message:
+Now just create your messages:
 ```python
-message.debug('My debug message')
-message.info('My info message')
-message.warning('My warning message')
-message.error('My error message')
-message.critical('My critical message')
+>>> message.debug('A debug message')
+>>> message.success('A success message')
+>>> message.info('A info message')
+>>> message.warning('A warning message')
+>>> message.error('A error message')
+>>> message.critical('A critical message')
 ```
