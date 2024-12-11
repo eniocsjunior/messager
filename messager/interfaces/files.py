@@ -45,7 +45,7 @@ class File(Interface):
             try:
                 content = path.read_text()
             except FileNotFoundError:
-                content = 'Date | App | Module | Message\n'
+                content = ''
             finally:
                 date = datetime.now(
                     ZoneInfo(self.timezone)
