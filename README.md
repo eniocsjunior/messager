@@ -20,6 +20,8 @@ You can also add interfaces after instantiating the Message class:
 >>> mysql = SQL(uri='mysql://user:password@localhost:3306/database')
 >>> message.add_interface(postgres)
 >>> message.add_interface(sqlite)
+>>> message.add_interface(mariadb)
+>>> message.add_interface(mysql)
 >>> len(message.interfaces)
 5
 ```
@@ -37,13 +39,30 @@ Now just create your messages:
 >>> message.critical('A critical message')
 ```
 
-## interfaces
-* Terminal - Show message on console.
-* File - Uses a folder to store log files.
-* SQL - Store logs in a SQL database.
+## Default interfaces
 
+### Interface
+Main interface. The arguments passed in this class are common to all interfaces.
+#### Arguments
+* min - Minimum level to send the message effectively. Default: 0
+* min - Maximum level to send the message effectively. Default: 5
+* timezone - Your preferred timezone. Default: UTC
+* mask - Mask used in date formatting. Default: '%d/%m/%Y %H:%M:%S'
+
+### Terminal
+Show message on console.
+
+### File
+Uses a folder to store log files.
+#### Argument
+* path - Folder where the log files will be created. REQUIRED!
+
+### SQL
+Store logs in a SQL database.
 SQL databases officially supported by the [Peewee](https://docs.peewee-orm.com/en/latest/index.html) library are:
 * SQLite3
 * PostgreSQL
 * MariaDB
 * MySQL
+#### Argument
+* uri - Uniform Resource Identifier. REQUIRED!
