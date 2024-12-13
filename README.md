@@ -1,6 +1,8 @@
 # Messager
 Package to create log messages.
 
+![Terminal](terminal.png)
+
 ## How to use
 Initially, we must configure the messaging server with the interfaces we want to use:
 ```python
@@ -38,9 +40,9 @@ Now just create your messages:
 ## interfaces
 * Terminal - Show message on console.
 * File - Uses a folder to store log files.
-* SQL - Store logs in a SQL database - SQLite3, PostgreSQL, MariaDB, MySQL, PerconaDB.
+* SQL - Store logs in a SQL database.
 
-Banks officially supported by the [Peewee](https://docs.peewee-orm.com/en/latest/index.html) library are:
+SQL databases officially supported by the [Peewee](https://docs.peewee-orm.com/en/latest/index.html) library are:
 * SQLite3
 * PostgreSQL
 * MariaDB

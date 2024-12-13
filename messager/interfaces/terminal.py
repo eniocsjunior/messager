@@ -32,17 +32,17 @@ class Terminal(Interface):
         self._set_attributes(kwargs)
         if self.level >= self.min or self.level <= self.max:
             color = {
-                0: '\033[1;96m ',
-                1: '\033[1;96m ',
-                2: '\033[1;92m ',
+                0: '\033[1;97m ',
+                1: '\033[1;92m ',
+                2: '\033[1;96m ',
                 3: '\033[1;93m ',
                 4: '\033[1;91m ',
                 5: '\033[1;101;97m '
             }
             formated_message = color[self.level] +\
+                datetime.now(ZoneInfo(self.timezone)).strftime(self.mask) + ' - ' +\
                 self.app + ' - ' +\
                 self.module + ' - ' +\
-                datetime.now(ZoneInfo(self.timezone)).strftime(self.mask) + ' - ' +\
                 str(self.message) + ' \033[0m'
             print(
                 formated_message
