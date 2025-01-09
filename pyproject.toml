@@ -7,8 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-peewee = {version = "^3.17.8", extras = ["sql"]}
+tzdata = "^2024.2"
 
+[tool.poetry.group.sql]
+optional = true
+
+[tool.poetry.group.sql.dependencies]
+peewee = "^3.17.8"
 
 [build-system]
 requires = ["poetry-core"]
